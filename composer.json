@@ -1,0 +1,13 @@
+{
+    "name": "volmir/todo-app",
+    "description": "ToDo application",
+    "homepage": "https://github.com/volmir/todo-app",   
+    "require": {
+        "doctrine/orm": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
