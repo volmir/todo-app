@@ -1,0 +1,74 @@
+<?php
+
+use App\Models\Todo;
+use App\Models\Auth;
+
+$todoModel = new Todo();
+$statuses = $todoModel->getStatuses();
+
+$auth = new Auth();
+
+?>
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h1>
+                <?php if (isset($data["id"])) { ?>
+                    Редактирование задания
+                <?php } else { ?>
+                    Добавление нового задания
+                <?php } ?>
+            </h1>
+        </div>
+    </div>
+    
+<?php if (!empty($errors)) { ?>
+<div class="col-lg-12">
+<div class="alert alert-danger" role="alert">
+    <?php foreach ($errors as $error) { ?>
+        <?= $error ?><br>
+    <?php } ?>
+</div>   
+    </div>
+<?php } ?>    
+    
+<div class="col-lg-12">
+            <form method="post">
+                <input type="hidden" name="id" value="<?php echo (isset($data["id"]) ? $data["id"] : "") ?>">
+                <div class="form-group">
+                    <label for="username">Имя:</label>
+                    <input type="text" class="form-control" name="username" id="username" value="<?php echo (isset($data["username"]) ? $data["username"] : "") ?>">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" name="email" id="email" value="<?php echo (isset($data["email"]) ? $data["email"] : "") ?>">
+                </div>
+                <div class="form-group">
+                    <label for="description">Описание:</label>
+                    <textarea class="form-control" name="description" id="description"><?php echo (isset($data["description"]) ? $data["description"] : "") ?></textarea>
+                </div>
+<?php if (!empty($id)) { ?>                       
+                <div class="form-group">
+                    <label for="file">Статус:</label>
+                    <select name="status">
+<?php foreach ($statuses as $id => $status) { 
+    $is_selected = '';
+    if (isset($data["status"]) && $id == $data["status"]) {
+        $is_selected = 'selected';
+    }
+?>        
+<option value="<?= $id ?>" <?= $is_selected?>><?= $status ?></option>
+<?php } ?>
+
+                    </select>
+                </div>       
+<?php } else { ?> 
+<input type="hidden" name="status" value="0">
+<?php } ?>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            </form>    
+
+</div>
+</div>
+

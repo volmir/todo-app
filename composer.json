@@ -3,7 +3,7 @@
     "description": "ToDo application",
     "homepage": "https://github.com/volmir/todo-app",   
     "require": {
-        "doctrine/orm": "^2.7"
+        "gabordemooij/redbean": "dev-master"
     },
     "autoload": {
         "psr-4": {

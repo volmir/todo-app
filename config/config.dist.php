@@ -8,7 +8,7 @@ return [
         '/sitemap.xml' => 'site/sitemap',         
     ],    
     'db' => [
-        'dbname' => 'test',
+        'dbname' => 'todo',
         'user' => 'root',
         'password' => '',
         'host' => '127.0.0.1',

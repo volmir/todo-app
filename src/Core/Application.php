@@ -6,8 +6,7 @@ use App\Core\Registry;
 use App\Core\Benchmark;
 use App\Core\Response;
 use App\Core\Router;
-use App\Adapter\DoctrineAdapter;
-use Doctrine\ORM\EntityManager;
+use App\Adapter\RedBeanAdapter;
 
 class Application
 {
@@ -20,12 +19,7 @@ class Application
      *
      * @var Registry
      */
-    public $config;
-    /**
-     *
-     * @var EntityManager
-     */
-    public $em;    
+    public $config;  
 
     /**
      *
@@ -37,7 +31,7 @@ class Application
         $this->config = new Registry($config);      
         $this->response = new Response();
         $this->router = new Router($this->config->routes);        
-        $this->em = (new DoctrineAdapter($this->config->db))->getEm();        
+        RedBeanAdapter::setup($this->config->db);
         $this->execute();
     }
 
@@ -45,7 +39,7 @@ class Application
     {
         $controllerName = $this->router->getControllerName();
         try {
-            $controllerClass = '\\App\Controllers\\' . $controllerName;
+            $controllerClass = '\\App\Controllers\\' . $controllerName . 'Controller';
             if (class_exists($controllerClass)) {
                 $controller = new $controllerClass;
                 if ($controller instanceof Controller) {
@@ -64,11 +58,6 @@ class Application
         $this->response->sendHeaders();
 
         echo $this->response->getContent();
-    }
-
-    public function db($em)
-    {
-        $this->em = $em;
-    }    
+    }  
     
 }

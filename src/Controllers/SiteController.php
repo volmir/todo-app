@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 
-class Site extends Controller 
+class SiteController extends Controller 
 {
     
     public function error404Action() 

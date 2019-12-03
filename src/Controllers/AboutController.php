@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 
-class About extends Controller
+class AboutController extends Controller
 {
 
     public function indexAction() 

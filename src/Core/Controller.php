@@ -34,6 +34,8 @@ abstract class Controller
         
         $controllerPath = explode('\\', get_called_class());
         $controllerName = strtolower(array_pop($controllerPath));
+        $controllerName = str_replace('controller', '', $controllerName);
+        
         $this->view = new View($this);
         $this->view->setPath(dirname(__DIR__) . '/../templates/' . $controllerName . '/');        
        

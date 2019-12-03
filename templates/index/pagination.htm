@@ -1,0 +1,38 @@
+
+    <div class="col-xs-12 mx-auto">
+ 
+        <ul class="pagination justify-content-center">
+            <?php
+            if (isset($pages['prev'])) {
+            ?>
+            <li class="page-item">
+                <a class="page-link" href="?page=1"><<</a>  
+            </li>    
+            <li class="page-item">    
+                <a class="page-link" href="?page=<?=$pages['prev']?>"><</a>
+            </li>
+            <?php } ?>
+            <?php       
+            foreach ($pages['pages'] as $page) {
+            $activeClass = '';
+            if ($page == $pages['current']) {
+            $activeClass = ' active';
+            }
+            ?>
+            <li class="page-item <?=$activeClass?>"><a class="page-link" href="?page=<?=$page?>"><?=$page?></a>
+            </li>
+            <?php } ?>  
+            <?php
+            if (isset($pages['next'])){
+            ?>
+            <li class="page-item">
+                <a class="page-link" href="?page=<?=$pages['next']?>">></a> 
+            </li>    
+            <li class="page-item">    
+                <a class="page-link" href="?page=<?=$pages['last']?>">>></a>
+            </li>            
+            <?php } ?>
+        </ul>
+  
+    </div>    
+  
