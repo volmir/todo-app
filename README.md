@@ -53,7 +53,9 @@ server {
 ```   
 
 
-### Doctrine ORM
+### RedBeanPHP ORM
 
-vendor/bin/doctrine orm:info
+https://www.redbeanphp.com/index.php
+https://prowebmastering.ru/redbeanphp-orm-dlya-php.html
+
 
