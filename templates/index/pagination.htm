@@ -1,4 +1,8 @@
+<?php
 
+$sort = "&field=" . $field . "&sort=" . $sort;
+
+?>
     <div class="col-xs-12 mx-auto">
  
         <ul class="pagination justify-content-center">
@@ -6,10 +10,10 @@
             if (isset($pages['prev'])) {
             ?>
             <li class="page-item">
-                <a class="page-link" href="?page=1"><<</a>  
+                <a class="page-link" href="?page=1<?=$sort?>"><<</a>  
             </li>    
             <li class="page-item">    
-                <a class="page-link" href="?page=<?=$pages['prev']?>"><</a>
+                <a class="page-link" href="?page=<?=$pages['prev']?><?=$sort?>"><</a>
             </li>
             <?php } ?>
             <?php       
@@ -19,17 +23,17 @@
             $activeClass = ' active';
             }
             ?>
-            <li class="page-item <?=$activeClass?>"><a class="page-link" href="?page=<?=$page?>"><?=$page?></a>
+            <li class="page-item <?=$activeClass?>"><a class="page-link" href="?page=<?=$page?><?=$sort?>"><?=$page?></a>
             </li>
             <?php } ?>  
             <?php
             if (isset($pages['next'])){
             ?>
             <li class="page-item">
-                <a class="page-link" href="?page=<?=$pages['next']?>">></a> 
+                <a class="page-link" href="?page=<?=$pages['next']?><?=$sort?>">></a> 
             </li>    
             <li class="page-item">    
-                <a class="page-link" href="?page=<?=$pages['last']?>">>></a>
+                <a class="page-link" href="?page=<?=$pages['last']?><?=$sort?>">>></a>
             </li>            
             <?php } ?>
         </ul>

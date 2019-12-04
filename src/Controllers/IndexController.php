@@ -20,9 +20,21 @@ class IndexController extends Controller
         $sql = "SELECT count(id) as count_rows FROM todo";
         $todos_count = RedBean::getCol($sql);
         
+        
+        if (!isset($_GET['sort']) || !in_array($_GET['sort'], ['asc', 'desc'])) {
+            $sort = 'asc';
+        } else {
+            $sort = $_GET['sort'];
+        }
+        if (!isset($_GET['field']) || !in_array($_GET['field'], ['username', 'email', 'status'])) {
+            $field = 'username';
+        } else {
+            $field = $_GET['field'];
+        }
+        
         $sql = "SELECT * "
                 . "FROM todo "
-                . "ORDER BY id DESC "
+                . "ORDER BY " . $field . " " . $sort . " "
                 . "LIMIT " . ($page - 1) * $items_in_page . ", " . $items_in_page;
         $todos = RedBean::getAll($sql);
                
@@ -32,11 +44,13 @@ class IndexController extends Controller
                 ->setPerPageLimit($items_in_page)
                 ->setMaxPageCount(6)
                 ->getPages();         
-        
+              
         $this->view->set([
             'title' => 'ToDo',
             'todos' => $todos,            
             'pages' => $pages,            
+            'sort' => $sort,            
+            'field' => $field,            
         ]);
 
         $this->view->render('index');
